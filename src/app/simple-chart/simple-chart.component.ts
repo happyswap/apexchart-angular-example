@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {ChartDataProviderService} from "../chart-data-provider.service";
-import {IChartViewDefinition, IOptionsChangeData} from "./Interface";
+import {IChartViewDefinition, IOptionsChangeData, TChartLabels} from "./Interface";
 import {ApexAxisChartSeries, ChartComponent} from "ng-apexcharts";
 
 @Component({
@@ -9,21 +9,32 @@ import {ApexAxisChartSeries, ChartComponent} from "ng-apexcharts";
   styleUrls: ['./simple-chart.component.scss']
 })
 export class SimpleChartComponent implements OnInit {
-  public isDefined:boolean = false;
-  private chartOptions: Partial<IChartViewDefinition> = {};
 
+  private _options: Partial<IChartViewDefinition>;
+  private _labels: TChartLabels ;
+
+  @Input()
+  set labels(value:TChartLabels){
+    if(value){
+      this._labels = value;
+    }
+  };
+  get labels():TChartLabels{
+    return this._labels;
+  }
   @Input()
   set options(value:Partial<IChartViewDefinition>){
     if(value){
-      this.chartOptions = value;
-      this.isDefined=true;
-    }else{
-      this.isDefined=false;
+      this._options = value;
     }
   };
   get options():Partial<IChartViewDefinition>{
-    return this.chartOptions;
+    return this._options;
   }
+
+  public get isDefined():boolean {
+    return this._labels!==undefined && this._options!==undefined;
+  };
 
   @ViewChild('chart') chart: ChartComponent;
 
@@ -33,15 +44,12 @@ export class SimpleChartComponent implements OnInit {
 
   }
 
-  json(data:any){
-    return JSON.stringify(data);
-  }
+
 
   ngOnInit(): void {
     this.chartDataProvider.chartData$.subscribe(data=>{
       this.data = data;
       console.log(data);
-
     })
   }
 

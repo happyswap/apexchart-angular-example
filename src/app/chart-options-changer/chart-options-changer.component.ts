@@ -32,7 +32,7 @@ export class ChartOptionsChangerComponent implements OnInit {
   @Output() typeChange = new EventEmitter<IOptionsChangeData>();
   @Output() colorChange = new EventEmitter<IOptionsChangeData>();
   @Input() graphTypes:string[]=['column','line','area'];
-  @Input() graphColors:string[]=['#FF0000','#00FF00','#0000FF', '#FFFF00','#FF00FF','#00FFFF'];
+  @Input() graphColors:string[]=['#feb019','#00e396','#008ffb','#FF0000','#00FF00','#0000FF', '#FFFF00','#FF00FF','#00FFFF'];
 
 
   onColorChange({value}:{value:string},{name}:{name:string}){

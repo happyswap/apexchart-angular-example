@@ -1,8 +1,7 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {ApexAxisChartSeries} from "ng-apexcharts";
-import {IChartOptions} from "./simple-chart/Interface";
-import {filter} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 
 @Injectable({
@@ -15,16 +14,19 @@ export class ChartDataProviderService {
       {
         name:"TEAM A",
         type:"column",
+        color:'#008ffb',
         data:[30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
       },
       {
         name:"TEAM B",
         type:"area",
+        color: '#00e396',
         data:[44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
       },
       {
         name:"TEAM C",
         type:"line",
+        color: '#feb019',
         data:[23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
       }
     ]
@@ -32,30 +34,87 @@ export class ChartDataProviderService {
 
   private labelsData = new BehaviorSubject<Date[]>(
     [
-        new Date('2021-01-01'),
-        new Date('2021-02-01'),
-        new Date('2021-03-01'),
-        new Date('2021-04-01'),
-        new Date('2021-05-01'),
-        new Date('2021-06-01'),
-        new Date('2021-07-01'),
-        new Date('2021-08-01'),
-        new Date('2021-09-01'),
-        new Date('2021-10-01'),
-        new Date('2021-11-01')
+        new Date('2021-01-01 00:00:00'),
+        new Date('2021-01-02 00:00:00'),
+        new Date('2021-01-03 00:00:00'),
+        new Date('2021-01-04 00:00:00'),
+        new Date('2021-01-05 00:00:00'),
+        new Date('2021-01-06 00:00:00'),
+        new Date('2021-01-07 00:00:00'),
+        new Date('2021-01-08 00:00:00'),
+        new Date('2021-01-09 00:00:00'),
+        new Date('2021-01-10 00:00:00'),
+        new Date('2021-01-11 00:00:00')
     ]
   )
 
   public chartData$ = this.chartData
-    .pipe(filter((value,index)=> this.startIndex >= index && index <= this.endIndex));
+    .pipe(
+      map((ds)=>{
+        const filtered =  ds.map((value,index) =>{
+          let data = (value.data as number[]).filter(
+            (_,index)=> this.startIndex <= index && index <= this.endIndex
+          )
+          return {...value, ...{data}}
+        })
+        return filtered;
+      })
+    );
   public fullLabelData$ = this.labelsData.asObservable();
   public labelData$ = this.labelsData
-    .pipe(filter((value,index)=> this.startIndex >= index && index <= this.endIndex));
+    .pipe(map((value)=>{
+      const filtered =  value.filter((_,index) =>{
+        return this.startIndex <= index && index <= this.endIndex
+      })
+      return filtered;
+    }));
 
-  public setNewData(chartSeries:ApexAxisChartSeries){
-    this.chartData.next(chartSeries)
-  }
+
   private startIndex=0;
   private endIndex = this.labelsData.value.length-1;
+  // TODO change for comparing by YMD from datejs
+  setRange(startDate:Date, endDate:Date){
+    if(startDate && endDate) {
+      const startTime = startDate.getTime();
+      const endTime = endDate.getTime();
+      let startIndex;
+      let endIndex = this.labelsData.value.length - 1;
+
+      if (this.labelsData.value.length <= 2 && startTime >= endTime) {
+        // prevent edge cases or wrong params
+        startIndex = 0;
+      } else {
+        this.labelsData.value.forEach((value, index) => {
+          const time = value.getTime();
+          console.log('startDate:',startDate);
+          console.log('endDate:',endDate);
+          let nextTick;
+          if ((index + 1) < this.labelsData.value.length) {
+            nextTick = this.labelsData.value[index + 1];
+            if (time === startTime) {
+              startIndex = index;
+            } else if (nextTick > startTime && time < startTime) {
+              startIndex = index + 1;
+            }
+            if (time === endTime) {
+              endIndex = index;
+            } else if(time < endTime && endTime < nextTick){
+              endIndex = index;
+            }
+          } else if (startIndex === undefined) {
+            startIndex = index;
+          }
+
+
+        })
+      }
+      this.startIndex = startIndex;
+      this.endIndex = endIndex;
+      console.log(`set range: startIndex:${startIndex}  endIndex:${endIndex}`);
+      this.labelsData.next(this.labelsData.value);
+      this.chartData.next(this.chartData.value);
+    }
+  }
+
 
 }

@@ -13,13 +13,15 @@ export interface IChartViewDefinition {
   chart:ApexChart;
   xaxis:ApexXAxis;
   yaxis:ApexYAxis | ApexYAxis[];
-  labels:string[];
+
   stroke:any; // ApexStroke;
   markers:ApexMarkers;
   plotOptions:ApexPlotOptions;
   fill:ApexFill;
   tooltip:ApexTooltip;
 }
+
+export type TChartLabels = string[];
 
 export interface IChartOptions extends IChartViewDefinition {
   series:ApexAxisChartSeries;

@@ -11,8 +11,8 @@
 
             [comparisonStart]="fullRange.value.start"
             [comparisonEnd]="fullRange.value.end">
-      <input matStartDate placeholder="Start date" (dateChange)="onStartDateChange($event)" formControlName="start" >
-      <input matEndDate placeholder="End date" (dateChange)="onStartDateChange($event)"  formControlName="end">
+      <input matStartDate placeholder="Start date"  formControlName="start" >
+      <input matEndDate placeholder="End date"   formControlName="end">
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="dateFilterPicker"></mat-datepicker-toggle>
     <mat-date-range-picker  #dateFilterPicker>
@@ -26,6 +26,6 @@
 
 </mat-toolbar>
 <div id="chart">
-  <app-simple-chart [options]="chartDefs[0]"></app-simple-chart>
-  <button (click)="updateData()" mat-button>Basic</button>
+  <app-simple-chart [options]="chartDefs[0]" [labels]="labels"></app-simple-chart>
+
 </div>
