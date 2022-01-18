@@ -1,19 +1,6 @@
-# Apexchart simple demo
+# Task0
 
-
-Very simple Angular example of using c `https://apexcharts.com/`.
-
-####Features:
- * switch a chart set on and off 
- * change type and colors of a chart
- * set date range for data 
-
-####Tech:
- Angular 11,
- Angular Material, RxJs, Apexcharts(ng-apexcharts)
-
-####Known issues, lacks:
- * chart-component do not save local setting for graph
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
 
 ## Development server
 

@@ -1,0 +1,32 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding >
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <span >{{node.name}}</span>
+        <mat-form-field appearance="outline">
+            <mat-label>Choose an type of graph</mat-label>
+            <mat-select [value]="node.type" (selectionChange)="onTypeChange($event, node)" >
+                <mat-option *ngFor="let item of graphTypes" [value]="item">{{item}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Choose an color of graph</mat-label>
+            <mat-select [value]="node.color" (selectionChange)="onColorChange($event, node)" class="color-picker">
+                <mat-option *ngFor="let item of graphColors" [value]="item" ><span style="display:inline-block; width: 20px; height: 20px; margin-right: 20px" [style.background-color]="item"></span><span [style.color]="item">{{item}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br>
+
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding  >
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+        </button>
+        <span>{{node.name}}</span>
+    </mat-tree-node>
+</mat-tree>

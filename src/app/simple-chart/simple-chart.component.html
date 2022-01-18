@@ -1,0 +1,23 @@
+
+
+<apx-chart
+        *ngIf="isDefined"
+        [series]="data"
+        [chart]="options.chart"
+        [yaxis]="options.yaxis"
+        [xaxis]="options.xaxis"
+        [labels]="options.labels"
+        [stroke]="options.stroke"
+        [plotOptions]="options.plotOptions"
+        [markers]="options.markers"
+        [fill]="options.fill"
+        [tooltip]="options.tooltip"
+></apx-chart>
+
+<app-chart-options-changer *ngIf="isDefined"
+                           [data]="data"
+                           (typeChange)="onTypeChange($event)"
+                           (colorChange)="onColorChange($event)"
+></app-chart-options-changer>
+
+<div *ngIf="!isDefined"> loading ...</div>

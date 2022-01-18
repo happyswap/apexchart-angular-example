@@ -1,0 +1,31 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <mat-form-field appearance="outline">
+    <mat-label>Choose date range</mat-label>
+    <mat-date-range-input
+            [formGroup]="selectedRange"
+            [rangePicker]="dateFilterPicker"
+
+            [comparisonStart]="fullRange.value.start"
+            [comparisonEnd]="fullRange.value.end">
+      <input matStartDate placeholder="Start date" (dateChange)="onStartDateChange($event)" formControlName="start" >
+      <input matEndDate placeholder="End date" (dateChange)="onStartDateChange($event)"  formControlName="end">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="dateFilterPicker"></mat-datepicker-toggle>
+    <mat-date-range-picker  #dateFilterPicker>
+      <mat-date-range-picker-actions>
+        <button mat-button matDateRangePickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDateRangePickerApply (click)="onDatePickerApply($event)">Apply</button>
+      </mat-date-range-picker-actions>
+
+    </mat-date-range-picker>
+  </mat-form-field>
+
+</mat-toolbar>
+<div id="chart">
+  <app-simple-chart [options]="chartDefs[0]"></app-simple-chart>
+  <button (click)="updateData()" mat-button>Basic</button>
+</div>
