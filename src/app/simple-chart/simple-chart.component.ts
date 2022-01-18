@@ -2,42 +2,17 @@ import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {ChartDataProviderService} from "../chart-data-provider.service";
 import {IChartViewDefinition, IOptionsChangeData, TChartLabels} from "./Interface";
 import {ApexAxisChartSeries, ChartComponent} from "ng-apexcharts";
+import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-simple-chart',
-  templateUrl: './simple-chart.component.html',
-  styleUrls: ['./simple-chart.component.scss']
+  selector:"app-simple-chart",
+  templateUrl:"./simple-chart.component.html",
+  styleUrls:["./simple-chart.component.scss"]
 })
 export class SimpleChartComponent implements OnInit {
 
-  private _options: Partial<IChartViewDefinition>;
-  private _labels: TChartLabels ;
-
-  @Input()
-  set labels(value:TChartLabels){
-    if(value){
-      this._labels = value;
-    }
-  };
-  get labels():TChartLabels{
-    return this._labels;
-  }
-  @Input()
-  set options(value:Partial<IChartViewDefinition>){
-    if(value){
-      this._options = value;
-    }
-  };
-  get options():Partial<IChartViewDefinition>{
-    return this._options;
-  }
-
-  public get isDefined():boolean {
-    return this._labels!==undefined && this._options!==undefined;
-  };
-
-  @ViewChild('chart') chart: ChartComponent;
-
+  @Input() only:TChartLabels;
+  @ViewChild("chart") chart:ChartComponent;
   data:ApexAxisChartSeries;
 
   constructor(private chartDataProvider:ChartDataProviderService) {
@@ -46,11 +21,52 @@ export class SimpleChartComponent implements OnInit {
 
 
 
-  ngOnInit(): void {
-    this.chartDataProvider.chartData$.subscribe(data=>{
-      this.data = data;
-      console.log(data);
-    })
+
+  @Input()
+  set options(value:Partial<IChartViewDefinition>) {
+    if (value) {
+      this._options = value;
+    }
+  };
+  get options():Partial<IChartViewDefinition> {
+    return this._options;
+  }
+
+  @Input()
+  set labels(value:TChartLabels) {
+    if (value) {
+      this._labels = value;
+    }
+  };
+  get labels():TChartLabels {
+    return this._labels;
+  }
+  public isOpen=false;
+  private _options:Partial<IChartViewDefinition>;
+  private _labels:TChartLabels;
+
+  public get isDefined():boolean {
+    return this._labels !== undefined && this._options !== undefined;
+  };
+
+  public get title():string{
+    return this.data.map((item)=>item.name).join(', ');
+  }
+
+  ngOnInit():void {
+    this.chartDataProvider.chartData$
+      .pipe(
+        map(itemSet => {
+          if (this.only === undefined) {
+            return itemSet;
+          } else {
+            return itemSet.filter(item => this.only.includes(item.name));
+          }
+        })
+      )
+      .subscribe(data => {
+        this.data = data;
+      });
   }
 
   onTypeChange({value, name}:IOptionsChangeData) {

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {ApexAxisChartSeries} from "ng-apexcharts";
 import {map} from "rxjs/operators";
 
@@ -48,7 +48,7 @@ export class ChartDataProviderService {
     ]
   )
 
-  public chartData$ = this.chartData
+  public chartData$:Observable<ApexAxisChartSeries> = this.chartData
     .pipe(
       map((ds)=>{
         const filtered =  ds.map((value,index) =>{

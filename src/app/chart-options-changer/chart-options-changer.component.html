@@ -1,3 +1,4 @@
+<mat-card>
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding >
@@ -15,9 +16,6 @@
                 <mat-option *ngFor="let item of graphColors" [value]="item" ><span style="display:inline-block; width: 20px; height: 20px; margin-right: 20px" [style.background-color]="item"></span><span [style.color]="item">{{item}}</span></mat-option>
             </mat-select>
         </mat-form-field>
-
-        <br>
-
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding  >
@@ -30,3 +28,4 @@
         <span>{{node.name}}</span>
     </mat-tree-node>
 </mat-tree>
+</mat-card>

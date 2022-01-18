@@ -1,23 +1,39 @@
+<mat-card>
+    <mat-card-title cdkOverlayOrigin #trigger="cdkOverlayOrigin">{{title}}</mat-card-title>
+    <mat-card-content>
+        <apx-chart
+                *ngIf="isDefined"
+                [series]="data"
+                [chart]="options.chart"
+                [yaxis]="options.yaxis"
+                [xaxis]="options.xaxis"
+                [labels]="labels"
+                [stroke]="options.stroke"
+                [plotOptions]="options.plotOptions"
+                [markers]="options.markers"
+                [fill]="options.fill"
+                [tooltip]="options.tooltip"
+        ></apx-chart>
 
 
-<apx-chart
-        *ngIf="isDefined"
-        [series]="data"
-        [chart]="options.chart"
-        [yaxis]="options.yaxis"
-        [xaxis]="options.xaxis"
-        [labels]="labels"
-        [stroke]="options.stroke"
-        [plotOptions]="options.plotOptions"
-        [markers]="options.markers"
-        [fill]="options.fill"
-        [tooltip]="options.tooltip"
-></apx-chart>
 
-<app-chart-options-changer *ngIf="isDefined"
-                           [data]="data"
-                           (typeChange)="onTypeChange($event)"
-                           (colorChange)="onColorChange($event)"
-></app-chart-options-changer>
+        <button (click)="isOpen = !isOpen" type="button"  >
+            {{isOpen ? "Close" : "Open"}}
+        </button>
 
-<div *ngIf="!isDefined"> loading ...</div>
+        <ng-template
+                cdkConnectedOverlay
+                [cdkConnectedOverlayOrigin]="trigger"
+                [cdkConnectedOverlayOpen]="isOpen"
+        >
+            <app-chart-options-changer *ngIf="isDefined"
+                                       [data]="data"
+                                       (typeChange)="onTypeChange($event)"
+                                       (colorChange)="onColorChange($event)"
+            ></app-chart-options-changer>
+        </ng-template>
+
+    </mat-card-content>
+
+    <mat-spinner *ngIf="!isDefined"></mat-spinner>
+</mat-card>

@@ -13,6 +13,9 @@ import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import { ChartOptionsChangerComponent } from './chart-options-changer/chart-options-changer.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatCardModule} from "@angular/material/card";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {OverlayModule} from "@angular/cdk/overlay";
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     MatSelectModule,
     MatOptionModule,
     MatToolbarModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    OverlayModule
   ],
   providers: [],
   bootstrap: [AppComponent]
