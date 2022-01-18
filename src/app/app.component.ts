@@ -81,7 +81,6 @@ export class AppComponent {
     handle Apply button datepicket click which is emitted after start and end change date
    */
   public onDatePickerApply($event){
-    console.log('onDatePickerApply', $event , this.selectedRange.value)
     this.chartDataProvider.setRange(this.selectedRange.value.start, this.selectedRange.value.end);
   }
 
