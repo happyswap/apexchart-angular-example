@@ -63,10 +63,9 @@ export class ChartDataProviderService {
   public fullLabelData$ = this.labelsData.asObservable();
   public labelData$ = this.labelsData
     .pipe(map((value)=>{
-      const filtered =  value.filter((_,index) =>{
+      return value.filter((_, index) => {
         return this.startIndex <= index && index <= this.endIndex
-      })
-      return filtered;
+      });
     }));
 
 
@@ -86,8 +85,7 @@ export class ChartDataProviderService {
       } else {
         this.labelsData.value.forEach((value, index) => {
           const time = value.getTime();
-          console.log('startDate:',startDate);
-          console.log('endDate:',endDate);
+
           let nextTick;
           if ((index + 1) < this.labelsData.value.length) {
             nextTick = this.labelsData.value[index + 1];
@@ -104,17 +102,17 @@ export class ChartDataProviderService {
           } else if (startIndex === undefined) {
             startIndex = index;
           }
-
-
         })
       }
       this.startIndex = startIndex;
       this.endIndex = endIndex;
-      console.log(`set range: startIndex:${startIndex}  endIndex:${endIndex}`);
       this.labelsData.next(this.labelsData.value);
       this.chartData.next(this.chartData.value);
     }
   }
 
+  public reSendValue(){
+    this.chartData.next(this.chartData.value);
+  }
 
 }

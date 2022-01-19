@@ -16,6 +16,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {OverlayModule} from "@angular/cdk/overlay";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {OverlayModule} from "@angular/cdk/overlay";
     MatDatepickerModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    OverlayModule
+    OverlayModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

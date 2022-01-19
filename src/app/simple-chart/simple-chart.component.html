@@ -36,12 +36,13 @@
         >
             <app-chart-options-changer *ngIf="isDefined"
                                        [data]="data"
+                                       [chartsNames]="chartNames"
                                        (typeChange)="onTypeChange($event)"
                                        (colorChange)="onColorChange($event)"
             ></app-chart-options-changer>
         </ng-template>
 
     </mat-card-content>
-
+    <mat-slide-toggle *ngFor="let name of chartNames" [name]="name" [checked]="isChartPresent(name)" (change)="onViewToggle($event)"> {{name}}</mat-slide-toggle>
     <mat-spinner *ngIf="!isDefined"></mat-spinner>
 </mat-card>

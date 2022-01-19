@@ -1,7 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" >
-        <mat-icon>menu</mat-icon>
-    </button>
+
     <span>Apexchar simple demo for Angular</span>
     <mat-form-field appearance="outline">
         <mat-label>Choose date range</mat-label>
@@ -25,7 +23,7 @@
 
         </mat-date-range-picker>
     </mat-form-field>
-}
+
 </mat-toolbar>
 <div id="chart">
     <app-simple-chart [options]="chartDefs[0]"  [labels]="labels"></app-simple-chart>
