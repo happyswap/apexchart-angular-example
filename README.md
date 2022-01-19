@@ -14,7 +14,6 @@ Very simple Angular example of using c `https://apexcharts.com/`.
 
 ####Known issues, lacks:
  * chart-component do not save local setting for graph
-  
 
 ## Development server
 
