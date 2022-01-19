@@ -41,7 +41,7 @@ export class SimpleChartComponent implements OnInit {
   get labels():TChartLabels {
     return this._labels;
   }
-  public isOpen=false;
+  public isOptionsOpen=false;
   private _options:Partial<IChartViewDefinition>;
   private _labels:TChartLabels;
 

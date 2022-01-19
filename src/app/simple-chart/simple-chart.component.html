@@ -1,5 +1,13 @@
 <mat-card>
-    <mat-card-title cdkOverlayOrigin #trigger="cdkOverlayOrigin">{{title}}</mat-card-title>
+    <div class="mat-card-header">
+        <button mat-icon-button class="example-icon" (click)="isOptionsOpen = !isOptionsOpen">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+
+       <mat-card-title cdkOverlayOrigin #trigger="cdkOverlayOrigin">{{title}}</mat-card-title>
+    </div>
+
     <mat-card-content>
         <apx-chart
                 *ngIf="isDefined"
@@ -17,14 +25,14 @@
 
 
 
-        <button (click)="isOpen = !isOpen" type="button"  >
-            {{isOpen ? "Close" : "Open"}}
-        </button>
+
 
         <ng-template
                 cdkConnectedOverlay
                 [cdkConnectedOverlayOrigin]="trigger"
-                [cdkConnectedOverlayOpen]="isOpen"
+                [cdkConnectedOverlayOpen]="isOptionsOpen"
+                [cdkConnectedOverlayHasBackdrop]="true"
+                (backdropClick)="isOptionsOpen = false"
         >
             <app-chart-options-changer *ngIf="isDefined"
                                        [data]="data"
