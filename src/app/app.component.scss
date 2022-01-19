@@ -1,4 +1,15 @@
-#chart {
-  max-width: 650px;
-  margin: 35px auto;
+.spacer{
+  flex: 1 1 auto;
+}
+
+.dashboard{
+  margin: 2em;
+  display: flex;
+  flex-wrap:wrap;
+
+  .panel{
+    //max-width: 650px;
+    min-width: 500px;
+    margin: 1em;
+  }
 }

@@ -67,7 +67,7 @@ export class AppComponent {
   labels:TChartLabels;
   selectedRange:FormGroup;
   fullRange:FormGroup;
-  onlylabelsFilter4Chart:TChartLabels[]=[['TEAM A'],['TEAM B'],];
+  onlylabelsFilter4Chart:TChartLabels[]=[['SET #1'],['SET #2'],['SET #1','SET #3'],];
 
   constructor(private chartDataProvider:ChartDataProviderService) {}
 

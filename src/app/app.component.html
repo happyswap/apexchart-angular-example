@@ -1,7 +1,11 @@
 <mat-toolbar>
 
-    <span>Apexchar simple demo for Angular</span>
-    <mat-form-field appearance="outline">
+    <mat-toolbar-row >
+        <span>Apexchart simple demo for Angular</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row >
+        <span class="spacer"></span>
+        <mat-form-field appearance="outline">
         <mat-label>Choose date range</mat-label>
         <mat-date-range-input
                 [formGroup]="selectedRange"
@@ -23,9 +27,12 @@
 
         </mat-date-range-picker>
     </mat-form-field>
+    </mat-toolbar-row>
 
 </mat-toolbar>
-<div id="chart">
-    <app-simple-chart [options]="chartDefs[0]"  [labels]="labels"></app-simple-chart>
-    <app-simple-chart [options]="chartDefs[0]" [only]="onlylabelsFilter4Chart[1]" [labels]="labels"></app-simple-chart>
+<div class="dashboard">
+    <app-simple-chart class='panel' [options]="chartDefs[0]"  [labels]="labels"></app-simple-chart>
+    <app-simple-chart class='panel' [options]="chartDefs[0]" [only]="onlylabelsFilter4Chart[1]" [labels]="labels"></app-simple-chart>
+    <app-simple-chart class='panel' [options]="chartDefs[0]" [only]="onlylabelsFilter4Chart[2]" [labels]="labels"></app-simple-chart>
+    <app-simple-chart class='panel' [options]="chartDefs[0]" [only]="onlylabelsFilter4Chart[0]" [labels]="labels"></app-simple-chart>
 </div>

@@ -12,19 +12,19 @@ export class ChartDataProviderService {
   private chartData = new BehaviorSubject<ApexAxisChartSeries>(
     [
       {
-        name:"TEAM A",
+        name:"SET #1",
         type:"column",
         color:'#008ffb',
         data:[30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
       },
       {
-        name:"TEAM B",
+        name:"SET #2",
         type:"area",
         color: '#00e396',
         data:[44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
       },
       {
-        name:"TEAM C",
+        name:"SET #3",
         type:"line",
         color: '#feb019',
         data:[23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
