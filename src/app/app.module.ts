@@ -32,7 +32,6 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     NgApexchartsModule,
     MatButtonModule,
     MatTreeModule,
-
     MatIconModule,
     MatNativeDateModule,
     MatSelectModule,

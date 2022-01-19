@@ -1,9 +1,9 @@
 import {Component, OnInit, Output, EventEmitter, Input} from "@angular/core";
-import {IOptionsChangeData} from "../simple-chart/Interface";
+import {IOptionsChangeData} from "../Interfaces";
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
 import {ApexAxisChartSeries} from "ng-apexcharts";
-
+// used for material tree
 interface IOptionNode {
   name:string;
   index?:number;
@@ -11,7 +11,7 @@ interface IOptionNode {
   color?:string;
   children?:IOptionNode[];
 }
-
+// used for material tree
 interface ITreeFlatNode {
   expandable:boolean;
   name:string;
@@ -71,8 +71,6 @@ export class ChartOptionsChangerComponent implements OnInit {
           return {name:item.name, type:item.type, color:item.color};
         })
       }
-
-
     ];
   }
 

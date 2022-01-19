@@ -1,13 +1,13 @@
-.spacer{
+.spacer {
   flex: 1 1 auto;
 }
 
-.dashboard{
+.dashboard {
   margin: 2em;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 
-  .panel{
+  .panel {
     //max-width: 650px;
     min-width: 500px;
     margin: 1em;

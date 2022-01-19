@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {ChartDataProviderService} from "../chart-data-provider.service";
-import {IChartViewDefinition, IOptionsChangeData, TChartLabels} from "./Interface";
+import {IChartViewDefinition, IOptionsChangeData, TChartLabels} from "../Interfaces";
 import {ApexAxisChartSeries, ChartComponent} from "ng-apexcharts";
 import {map, tap} from "rxjs/operators";
 import {MatSlideToggle, MatSlideToggleChange} from "@angular/material/slide-toggle";

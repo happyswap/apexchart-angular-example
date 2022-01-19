@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 import {ChartDataProviderService} from "./chart-data-provider.service";
-import {IChartViewDefinition, TChartLabels} from "./simple-chart/Interface";
+import {IChartViewDefinition, TChartLabels} from "./Interfaces";
 import {FormControl, FormGroup} from "@angular/forms";
 
 
@@ -67,9 +67,10 @@ export class AppComponent {
   labels:TChartLabels;
   selectedRange:FormGroup;
   fullRange:FormGroup;
-  onlylabelsFilter4Chart:TChartLabels[]=[['SET #1'],['SET #2'],['SET #1','SET #3'],];
+  onlylabelsFilter4Chart:TChartLabels[] = [["SET #1"], ["SET #2"], ["SET #1", "SET #3"]];
 
-  constructor(private chartDataProvider:ChartDataProviderService) {}
+  constructor(private chartDataProvider:ChartDataProviderService) {
+  }
 
 
   /**

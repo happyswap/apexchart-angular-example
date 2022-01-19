@@ -1,10 +1,8 @@
 <mat-card>
     <div class="mat-card-header">
-        <button mat-icon-button class="example-icon" (click)="isOptionsOpen = !isOptionsOpen">
+        <button mat-icon-button  (click)="isOptionsOpen = !isOptionsOpen">
             <mat-icon>menu</mat-icon>
         </button>
-
-
        <mat-card-title cdkOverlayOrigin #trigger="cdkOverlayOrigin">{{title}}</mat-card-title>
     </div>
 
@@ -23,10 +21,6 @@
                 [tooltip]="options.tooltip"
         ></apx-chart>
 
-
-
-
-
         <ng-template
                 cdkConnectedOverlay
                 [cdkConnectedOverlayOrigin]="trigger"
@@ -43,6 +37,6 @@
         </ng-template>
 
     </mat-card-content>
-    <mat-slide-toggle *ngFor="let name of chartNames" [name]="name" [checked]="isChartPresent(name)" (change)="onViewToggle($event)"> {{name}}</mat-slide-toggle>
+    <mat-slide-toggle class="toggle-slider" *ngFor="let name of chartNames" [name]="name" [checked]="isChartPresent(name)" (change)="onViewToggle($event)"> {{name}}</mat-slide-toggle>
     <mat-spinner *ngIf="!isDefined"></mat-spinner>
 </mat-card>
